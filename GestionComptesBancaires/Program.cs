@@ -4,8 +4,9 @@ namespace GestionComptesBancaires
 {
     class Program
     {
-        private static byte choice;
+        
         private static byte AccountToUse;
+        private static byte quiteProgram = 0;
         static void Main(string[] args)
         {
             Run();
@@ -16,30 +17,14 @@ namespace GestionComptesBancaires
             /**
              * Give the user the following choices
              * (0) Give the user a chance to create an account
-             * (1) Display your accounts information
-             * (2) choose which account your want to use
+             * (1) choose which account your want to use
+             * (2) Display your accounts information 
              * (3) Withraw money from your account
-             * (4) Diposit money in your account
+             * (4) Deposit money in your account
              */
 
+            //Create an account
             CreateAccount();
-
-            Console.WriteLine("choose which account your want to use : \r\n (1) CompteSurCheque \r\n (2) CompteSurCarnet");
-            AccountToUse = Convert.ToByte(Console.ReadLine());
-
-            if(AccountToUse == 1)
-            {
-                CompteSurCheque cptCheque = new CompteSurCheque();
-                InputManager(cptCheque);
-            } else if( AccountToUse == 2)
-            {
-                CompteSurCarnet cptCarnet = new CompteSurCarnet();
-                InputManager(cptCarnet);
-            }
-
-
-
-           
 
 
 
@@ -50,37 +35,48 @@ namespace GestionComptesBancaires
             Console.WriteLine("Welcome Are you ready to create an account:\r\n");
             Console.WriteLine("What is your name :");
             String HolderName = Console.ReadLine();
-            Console.WriteLine("How much would you like to deposit in your account:");
-            double deposit = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("How much would you like to deposit in your cheque account:");
+            double depositChaque = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("How much would you like to deposit in your Carnet account:");
+            double depositCarnet = Convert.ToDouble(Console.ReadLine());
 
-            CompteSurCheque cptCheque = new CompteSurCheque();
-            CompteSurCarnet cptCarnet = new CompteSurCarnet();
+            CompteSurCheque cptCheque = new CompteSurCheque(HolderName, depositChaque);
+            CompteSurCarnet cptCarnet = new CompteSurCarnet(HolderName, depositCarnet);
 
+            Console.WriteLine("Your Account Has been created, Here's your accounts information:\r\n");
 
-        }
+            cptCarnet.DisplayInfo();
+            //Block saperator
+            Console.WriteLine("\r\n______________________________________\r\n");
+            cptCheque.DisplayInfo();
+            //Block saperator
+            Console.WriteLine("\r\n______________________________________\r\n");
 
-        public static void InputManager(Object obj)
-        {
-
-            //Display the choices for the User
-            Console.WriteLine("Please Choose your next action: "
-                + "\r\n (1) -> choose which account your want to use"
-                + "\r\n (2) -> Display your accounts information "
-                + "\r\n (3) -> Withraw money from your account"
-                + "\r\n (4) -> Diposit money in your account");
-            choice = Convert.ToByte(Console.ReadLine());
-
-            switch (choice)
+            while (quiteProgram == 0)
             {
-                case 1:
-                    //Display Account Info method
-                    obj.DisplayInfo();
-                    break;
-                default:
-                    break;
+
+                Console.WriteLine("choose which account your want to use : \r\n (1) CompteSurCheque \r\n (2) CompteSurCarnet");
+            AccountToUse = Convert.ToByte(Console.ReadLine());
+
+            if (AccountToUse == 1)
+            {
+                cptCheque.ManageAccount();
+            }
+            else if (AccountToUse == 2)
+            {
+                cptCarnet.ManageAccount();
+            }
+                Console.WriteLine("Press Q to (quite) or (Enter) to continue");
+                if (Console.ReadKey().Key == ConsoleKey.Q)
+                {
+                    quiteProgram = 1;
+                }
+                else
+                {
+                    quiteProgram = 0;
+                }
             }
         }
-
 
     }
 }

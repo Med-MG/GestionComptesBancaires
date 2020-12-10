@@ -6,7 +6,29 @@ namespace GestionComptesBancaires
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Run();
         }
+
+        public static void Run()
+        {
+            /**
+             * Give the user the following choices
+             * (1) Display your accounts information
+             * (2) choose which account your want to use
+             * (3) Withraw money from your account
+             * (4) Diposit money in your account
+             */
+
+
+
+
+        }
+
+        public void InputManager()
+        {
+                
+        }
+
+
     }
 }

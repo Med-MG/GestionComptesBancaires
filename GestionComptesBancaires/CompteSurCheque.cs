@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GestionComptesBancaires
 {
-    class CompteSurCheque
+    class CompteSurCheque : AbstractCompte
     {
     }
 }

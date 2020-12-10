@@ -6,6 +6,10 @@ namespace GestionComptesBancaires
 {
     class CompteSurCheque : AbstractCompte
     {
+        public String NumCheque { get; set; }
+        public String NumCarte { get; set; }
+
+        DateTime DateFinValiditeCarte = DateTime.Now.AddYears(2);
 
         private double dailyWithdrawLimit = 10000;
 
@@ -13,10 +17,17 @@ namespace GestionComptesBancaires
         {
             //Empty constructor
         }
-
-        public CompteSurCheque(String Name, int AccountNum, double balance) : base(Name, AccountNum, balance)
+        Random random = new Random((int)DateTime.Now.Ticks);
+        public CompteSurCheque(String Name, double balance) : base(Name, balance)
         {
-            //no init
+            this.NumCheque = Convert.ToString(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65)));
+            this.NumCarte = Convert.ToString(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65)));
+        }
+
+        //Display Account Info
+        public override void DisplayInfo()
+        {
+            Console.WriteLine($"\r\nYour Account Cheque Information : \r\nAccount Holder : {this.AccountHolderName} \r\nAccount Number: {this.AccountNumber}\r\nCheque Number: {this.NumCheque}\r\nCarte Number: {this.NumCarte}\r\nCarte Number: {this.DateFinValiditeCarte}\r\n Account Balance: {this.Balace}");
         }
 
         public override bool Credit(double ammount)

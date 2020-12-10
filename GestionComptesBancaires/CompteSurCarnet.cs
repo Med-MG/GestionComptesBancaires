@@ -6,18 +6,23 @@ namespace GestionComptesBancaires
 {
     class CompteSurCarnet : AbstractCompte
     {
-        
 
+        public int NumCarnet { get; set; }
         public CompteSurCarnet() : base()
         {
             //emty constructor
         }
 
-        public CompteSurCarnet(String Name, int AccountNum, double balance) : base(Name, AccountNum, balance)
+        public CompteSurCarnet(String Name, double balance) : base(Name, balance)
         {
-
+            this.NumCarnet = 1212;
         }
 
+        //Display Account Info
+        public override void DisplayInfo()
+        {
+            Console.WriteLine($"\r\nYour Account Cheque Information : \r\nAccount Holder : {this.AccountHolderName}\r\nAccount Number: {this.AccountNumber}\r\nCarnet Number: {this.NumCarnet}\r\nAccount Balance: {this.Balace}");
+        }
         public override bool Credit(double ammount)
         {
             //amount to add to the balance
@@ -27,6 +32,8 @@ namespace GestionComptesBancaires
             return true;
                  
         }
+
+ 
 
         public override bool Debit(double ammount)
         {

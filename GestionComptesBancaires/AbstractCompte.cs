@@ -17,9 +17,9 @@ namespace GestionComptesBancaires
         }
 
         //Account Number 
-        private int accountNumber;
+        private String accountNumber;
 
-        public int AccountNumber
+        public String AccountNumber
         {
             get { return accountNumber; }
             set { accountNumber = value; }
@@ -39,13 +39,16 @@ namespace GestionComptesBancaires
         {
             //Empty constructor
         }
-        public AbstractCompte(String Name, int AccountNum, double balance)
+
+        Random random = new Random((int)DateTime.Now.Ticks);
+        public AbstractCompte(String Name, double balance)
         {
             this.balance = balance;
-            this.accountNumber = AccountNum;
+            this.accountNumber = Convert.ToString(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65)));
             this.accountHolderName = Name;
-        }
 
+        }
+        public abstract void DisplayInfo();
         public abstract bool Credit(double ammount);
         public abstract bool Debit(double ammount);
     }

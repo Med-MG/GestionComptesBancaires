@@ -17,13 +17,16 @@ namespace GestionComptesBancaires
         {
             //Empty constructor
         }
-        Random random = new Random((int)DateTime.Now.Ticks);
+
         public CompteSurCheque(String Name, double balance) : base(Name, balance)
         {
             this.NumCheque = GenerateNumber();
             this.NumCarte =  GenerateNumber();
         }
+        public CompteSurCheque( String AccNumber ,String Name, double balance) : base(AccNumber, Name, balance)
+        {
 
+        }
         //Display Account Info
         public override void DisplayInfo()
         {
@@ -33,9 +36,9 @@ namespace GestionComptesBancaires
         public override bool Credit(double ammount)
         {
             this.Balace += ammount;
-            Console.WriteLine("\r\n||Your che's account balance is now {0} dh ||\r\n", this.Balace);
+            Console.WriteLine("\r\n||Your cheque's account balance is now {0} dh ||\r\n", this.Balace);
 
-            throw new NotImplementedException();
+            return true;
         }
 
         public override bool Debit(double ammount)

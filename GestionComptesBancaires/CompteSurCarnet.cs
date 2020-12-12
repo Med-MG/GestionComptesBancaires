@@ -12,11 +12,22 @@ namespace GestionComptesBancaires
         {
             //emty constructor
         }
-        Random random = new Random((int)DateTime.Now.Ticks);
+        /**
+        * Constructor
+        * @params Sring Name
+        * @params Double balance
+        * 
+        */
         public CompteSurCarnet(String Name, double balance) : base(Name, balance)
         {
             this.NumCarnet = GenerateNumber();
         }
+
+        public CompteSurCarnet(String AccNumber ,String Name, double balance) : base(AccNumber, Name, balance)
+        {
+            this.NumCarnet = GenerateNumber();
+        }
+
 
         //Display Account Info
         public override void DisplayInfo()

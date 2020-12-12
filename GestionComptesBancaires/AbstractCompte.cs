@@ -35,11 +35,46 @@ namespace GestionComptesBancaires
             set { balance = value; }
         }
 
+
+        /**
+         * This is an Empty constructor
+         * 
+         * 
+         */
+
         public AbstractCompte()
         {
             //Empty constructor
         }
 
+
+        /**
+        * Constructor
+        * @params Sring Name
+        * @params Double balance
+        * 
+        */
+        public AbstractCompte(String Name, double balance)
+        {
+            this.balance = balance;
+            this.accountNumber = GenerateNumber();
+            this.accountHolderName = Name;
+
+        }
+
+        /**
+        * Constructor
+        * @params Sring Name
+        * @params String AccNumber
+        * @params Double balance
+        */
+        public AbstractCompte(String AccNumber, String Name, double balance)
+        {
+            this.balance = balance;
+            this.accountNumber = AccNumber;
+            this.accountHolderName = Name;
+
+        }
         public string GenerateNumber()
         {
             Random random = new Random();
@@ -51,17 +86,7 @@ namespace GestionComptesBancaires
             }
             return r;
         }
-
-        Random random = new Random((int)DateTime.Now.Ticks);
-        public AbstractCompte(String Name, double balance)
-        {
-            this.balance = balance;
-            this.accountNumber = GenerateNumber();
-            this.accountHolderName = Name;
-
-        }
-
-        public void ManageAccount() {
+        public void ManageAccount(int AccountType, int index) {
 
             
 
@@ -69,7 +94,8 @@ namespace GestionComptesBancaires
             Console.WriteLine("Please Choose your next action: "
                 + "\r\n (1) -> Display your accounts information "
                 + "\r\n (2) -> Withdraw money from your account"
-                + "\r\n (3) -> Diposit money in your account");
+                + "\r\n (3) -> Diposit money in your account"
+                + "\r\n (4) -> Delete your account");
             this.choice = Convert.ToByte(Console.ReadLine());
 
             switch (choice)
@@ -89,6 +115,9 @@ namespace GestionComptesBancaires
                     Console.WriteLine("How much you want deposit");
                     double dAmmount = Convert.ToDouble(Console.ReadLine());
                     Credit(dAmmount);
+                    break;
+                case 4:
+                    Bank.DeleteAccount(AccountType, index);
                     break;
                 default:
                     break;
